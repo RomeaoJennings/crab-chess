@@ -1,21 +1,11 @@
 use std::ops::{Index, IndexMut};
 
-use super::{Bitboard, Player};
+use crate::core::Bitboard;
+
+use super::{PieceType, Player};
 
 #[derive(Debug, Clone)]
-pub struct Position {
-    player_to_move: Player,
-    bitboards: PlayerBitboards,
-}
-
-#[derive(Debug, Clone)]
-struct PlayerBitboards([PieceTypeBitboards; 2]);
-
-impl PlayerBitboards {
-    pub fn empty() -> Self {
-        Self(std::array::from_fn(|_| PieceTypeBitboards::empty()))
-    }
-}
+pub struct PlayerBitboards([PieceTypeBitboards; 2]);
 
 impl Default for PlayerBitboards {
     fn default() -> Self {
@@ -75,13 +65,7 @@ impl IndexMut<Player> for PlayerBitboards {
 }
 
 #[derive(Debug, Clone)]
-struct PieceTypeBitboards([Bitboard; 7]);
-
-impl PieceTypeBitboards {
-    pub fn empty() -> Self {
-        Self([Bitboard::from(0); 7])
-    }
-}
+pub struct PieceTypeBitboards([Bitboard; 7]);
 
 impl Index<PieceType> for PieceTypeBitboards {
     type Output = Bitboard;
@@ -97,15 +81,4 @@ impl IndexMut<PieceType> for PieceTypeBitboards {
         let index = index as usize;
         &mut self.0[index]
     }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-enum PieceType {
-    King,
-    Queen,
-    Rook,
-    Bishop,
-    Knight,
-    Pawn,
-    All,
 }
