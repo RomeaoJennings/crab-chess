@@ -1,5 +1,9 @@
 use std::fmt::Display;
 
+use iterator::IndexIterator;
+
+mod iterator;
+
 const NUM_SQUARES: usize = 64;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -8,6 +12,15 @@ pub struct Bitboard(u64);
 impl From<u64> for Bitboard {
     fn from(value: u64) -> Self {
         Self(value)
+    }
+}
+
+impl IntoIterator for Bitboard {
+    type Item = usize;
+    type IntoIter = IndexIterator;
+    
+    fn into_iter(self) -> Self::IntoIter {
+        self.into()
     }
 }
 
