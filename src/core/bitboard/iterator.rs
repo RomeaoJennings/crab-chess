@@ -35,11 +35,7 @@ mod tests {
     #[case::empty(0, &[])]
     #[case::spread(0xF000000000020001, &[0, 17, 60, 61, 62, 63])]
     fn iteration(#[case] val: u64, #[case] expected_vals: &[usize]) {
-        let mut iter = IndexIterator(val);
-
-        for &val in expected_vals {
-            assert_eq!(Some(val), iter.next());
-        }
-        assert_eq!(None, iter.next());
+        let actual = IndexIterator(val).collect::<Vec<_>>();
+        assert_eq!(expected_vals, actual);
     }
 }
