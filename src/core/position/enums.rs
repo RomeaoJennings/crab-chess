@@ -1,4 +1,3 @@
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PieceType {
     King,
@@ -14,12 +13,17 @@ impl PieceType {
     pub fn get_display_char(&self, player: Player) -> char {
         let white_pieces = ['♚', '♛', '♜', '♝', '♞', '♟'];
         let black_pieces = ['♔', '♕', '♖', '♗', '♘', '♙'];
-        
+
         let index = *self as usize;
         match player {
             Player::White => white_pieces[index],
-            Player::Black => black_pieces[index]
+            Player::Black => black_pieces[index],
         }
+    }
+
+    pub fn iter() -> impl Iterator<Item = PieceType> {
+        use PieceType::*;
+        [King, Queen, Rook, Bishop, Knight, Pawn].into_iter()
     }
 }
 
@@ -27,7 +31,7 @@ impl PieceType {
 pub enum Player {
     #[default]
     White,
-    Black
+    Black,
 }
 
 impl Player {
@@ -36,5 +40,9 @@ impl Player {
             Player::Black => Player::White,
             Player::White => Player::Black,
         }
+    }
+
+    pub fn iter() -> impl Iterator<Item = Player> {
+        [Player::White, Player::Black].into_iter()
     }
 }

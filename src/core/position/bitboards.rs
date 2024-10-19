@@ -9,7 +9,7 @@ pub struct PlayerBitboards([PieceTypeBitboards; 2]);
 
 impl Default for PlayerBitboards {
     fn default() -> Self {
-        let white_king = Bitboard::from(0x4);
+        let white_king = Bitboard::from(0x10);
         let white_queen = Bitboard::from(0x8);
         let white_rooks = Bitboard::from(0x81);
         let white_bishops = Bitboard::from(0x24);
@@ -17,13 +17,13 @@ impl Default for PlayerBitboards {
         let white_pawns = Bitboard::from(0xFF00);
         let white_all = Bitboard::from(0xFFFF);
 
-        let black_king = Bitboard::from(0x400000000000000);
+        let black_king = Bitboard::from(0x1000000000000000);
         let black_queen = Bitboard::from(0x800000000000000);
         let black_rooks = Bitboard::from(0x8100000000000000);
         let black_bishops = Bitboard::from(0x2400000000000000);
         let black_knights = Bitboard::from(0x4200000000000000);
-        let black_pawns = Bitboard::from(0xFF00000000000000);
-        let black_all = Bitboard::from(0xFFFF000000000000);
+        let black_pawns = Bitboard::from(0xFF000000000000);
+        let black_all = Bitboard::from(0xFFFF0000000000);
 
         Self([
             PieceTypeBitboards([
